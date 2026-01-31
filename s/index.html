@@ -19,10 +19,42 @@
 <p id="status" style="margin-top:20px; color:green;"></p>
 
 <script>
-  function send(reason) {
-    document.getElementById("status").innerText =
-      "Message sent to the vehicle owner (" + reason + ").";
+ <script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
+  if (id) {
+    document.getElementById("sticker").innerText = id;
   }
+
+  async function send(reason) {
+    const phone = localStorage.getItem("owner_" + id);
+    const status = document.getElementById("status");
+
+    if (!phone) {
+      status.innerText = "Owner not registered yet.";
+      return;
+    }
+
+    status.innerText = "Sending message...";
+
+    const res = await fetch("/api/send-sms", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        phone: phone,
+        message: `Car alert (${id}): ${reason}`,
+      }),
+    });
+
+    if (res.ok) {
+      status.innerText = "Message sent to vehicle owner.";
+    } else {
+      status.innerText = "Failed to send message.";
+    }
+  }
+</script>
+
 </script>
 
 
