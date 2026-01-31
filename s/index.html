@@ -12,9 +12,19 @@
       <strong id="sticker">unknown</strong>
     </p>
 
-    <button>🚗 Blocking my car</button><br><br>
-    <button>🔦 Lights left on</button><br><br>
-    <button>⚠️ Other issue</button>
+<button onclick="send('Blocking my car')">🚗 Blocking my car</button><br><br>
+<button onclick="send('Lights left on')">🔦 Lights left on</button><br><br>
+<button onclick="send('Other issue')">⚠️ Other issue</button>
+
+<p id="status" style="margin-top:20px; color:green;"></p>
+
+<script>
+  function send(reason) {
+    document.getElementById("status").innerText =
+      "Message sent to the vehicle owner (" + reason + ").";
+  }
+</script>
+
 
     <p style="margin-top:40px; font-size:12px; color:gray;">
       No personal data is shown.
