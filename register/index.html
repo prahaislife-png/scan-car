@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Vehicle</title>
+  </head>
+  <body style="font-family: Arial; text-align:center; padding:40px;">
+    <h2>Register your vehicle</h2>
+
+    <p>Sticker ID</p>
+    <input id="sticker" placeholder="e.g. a1" /><br><br>
+
+    <p>Your phone number</p>
+    <input id="phone" placeholder="+420..." /><br><br>
+
+    <button onclick="save()">Save</button>
+
+    <p id="status" style="margin-top:20px; color:green;"></p>
+
+    <script>
+      function save() {
+        const sticker = document.getElementById("sticker").value;
+        const phone = document.getElementById("phone").value;
+
+        if (!sticker || !phone) {
+          alert("Please fill both fields");
+          return;
+        }
+
+        localStorage.setItem("owner_" + sticker, phone);
+        document.getElementById("status").innerText =
+          "Saved! This sticker is now linked to your phone.";
+      }
+    </script>
+  </body>
+</html>
