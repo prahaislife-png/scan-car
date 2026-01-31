@@ -32,5 +32,12 @@
           "Saved! This sticker is now linked to your phone.";
       }
     </script>
-  </body>
+ <script>
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  if (id) {
+    document.getElementById("sticker").value = id;
+  }
+</script>
+ </body>
 </html>
